@@ -78,6 +78,8 @@ function actualizarListas() {
         };
         if (index === selectedPremioIndex) {
             li.style.backgroundColor = 'lightblue'; // Resalta el premio seleccionado
+            //cambiar color de texto
+            li.style.color = 'black';
         }
         listaPremios.appendChild(li);
     });
@@ -138,8 +140,30 @@ function mostrarGanador(ganador, premio) {
         if (contador === 0) {
             clearInterval(interval);
             document.getElementById('contador').style.display = 'none';
-            document.getElementById('nombreGanador').textContent = `Ganador: ${ganador}`;
-            document.getElementById('premioGanador').textContent = `Premio: ${premio}`;
+            // Crear 2 span: uno para el texto "Ganador:" y otro para el nombre del ganador
+            const labelGanador = document.createElement('span');
+            labelGanador.textContent = 'Ganador: ';
+            labelGanador.id = 'labelGanador';
+
+            const nombreGanador = document.createElement('span');
+            nombreGanador.textContent = ganador;
+            nombreGanador.id = 'nombreGanador';
+            //Insertar los elementos en el div correspondiente
+            document.getElementById('nombreGanador').appendChild(labelGanador);
+            document.getElementById('nombreGanador').appendChild(nombreGanador);
+
+            // Crear 2 span: uno para el texto "Premio:" y otro para el nombre del premio
+            const labelPremio = document.createElement('span');
+            labelPremio.textContent = 'Premio: ';
+            labelPremio.id = 'labelPremio';
+
+            const premioGanador = document.createElement('span');
+            premioGanador.textContent = premio;
+            premioGanador.id = 'premioGanador';
+            //Insertar los elementos en el div correspondiente
+            document.getElementById('premioGanador').appendChild(labelPremio);
+            document.getElementById('premioGanador').appendChild(premioGanador);  
+
             document.getElementById('volverButton').style.display = 'block';
 
             // Explosión inicial de confeti
