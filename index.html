@@ -24,6 +24,7 @@
         <button onclick="cargarSorteo()">Ir al Sorteo</button>
     </div>
 
+    <!-- Página 2: Sorteo -->
     <div id="sorteo" class="page" style="display:none;">
         <h1>Sorteo</h1>
         <div class="lists-container">
@@ -38,8 +39,6 @@
         </div>
         <button onclick="sortearGanador()">Sortear Ganador</button>
     </div>
-    
-    
 
     <!-- Página 3: Ganador -->
     <div id="ganador" class="page" style="display:none;">
@@ -50,8 +49,21 @@
         <button onclick="volverAlSorteo()" style="display:none;" id="volverButton">Volver al Sorteo</button>
     </div>
 
+    <!-- Pagina 4: Fin del Sorteo -->
+    <div id="finSorteo" class="page" style="display:none;">
+        <h1>¡Felicidades a los Ganadores!</h1>
+        <h2>Estos son los ganadores y sus premios:</h2>
+        <div class="lists-container">
+            <div class="list-section">                
+                <ul id="listaGanadoresFinal"></ul>
+            </div>
+            <div class="list-section">
+                <ul id="listaPremiosFinal"></ul>
+            </div>
+        </div>
+        <button onclick="reiniciarSorteo()">Reiniciar Sorteo</button>
+
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-
 </body>
 </html>

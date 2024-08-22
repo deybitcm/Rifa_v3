@@ -2,6 +2,13 @@ let participantes = [
     'Participante 1',
     'Participante 2',
     'Participante 3',
+    'Participante 4',
+    'Participante 5',
+    'Participante 6',
+    'Participante 7',
+    'Participante 8',
+    'Participante 9',
+    'Participante 10',
 ];
 let premios = [
     'Premio 1',
@@ -129,7 +136,7 @@ function mostrarGanador(ganador, premio) {
     document.getElementById('volverButton').style.display = 'none';
     
 
-    let contador = 5;
+    let contador = 2;
     const contadorElemento = document.getElementById('contador');
     contadorElemento.textContent = contador;
 
@@ -198,8 +205,61 @@ function mostrarGanador(ganador, premio) {
     }, 1000);
 }
 
+function mostrarGanadores() {
+    const listaGanadores = document.getElementById('listaGanadoresFinal');
+    const listaPremios = document.getElementById('listaPremiosFinal');
+    listaGanadores.innerHTML = '';
+    listaPremios.innerHTML = '';
+    ganadores.forEach(ganador => {
+        const li = document.createElement('li');
+        li.textContent = `${ganador.participante}`;
+        li.style.alignContent = 'center';
+        li.style.textAlign = 'center';
+        listaGanadores.appendChild(li);
+
+        const liPremio = document.createElement('li');
+        liPremio.textContent = `${ganador.premio}`;
+        liPremio.style.alignContent = 'center';
+        liPremio.style.textAlign = 'center';
+        listaPremios.appendChild(liPremio);
+    });
+}
+
 function volverAlSorteo() {
     document.getElementById('ganador').style.display = 'none';
-    document.getElementById('sorteo').style.display = 'block';
-    actualizarListas();
+    if(premios.length > 0){
+        document.getElementById('sorteo').style.display = 'block';
+        actualizarListas();
+    } else {
+        document.getElementById('sorteo').style.display = 'none';
+        document.getElementById('finSorteo').style.display = 'block';
+        mostrarGanadores();
+    }
+}
+
+function reiniciarSorteo() {
+    participantes = [
+        'Participante 1',
+        'Participante 2',
+        'Participante 3',
+        'Participante 4',
+        'Participante 5',
+        'Participante 6',
+        'Participante 7',
+        'Participante 8',
+        'Participante 9',
+        'Participante 10',
+    ];
+    premios = [
+        'Premio 1',
+        'Premio 2',
+        'Premio 3',
+        'Premio 4',
+        'Premio 5',
+    ];
+    ganadores = [];
+    selectedPremioIndex = null;
+
+    document.getElementById('finSorteo').style.display = 'none';
+    document.getElementById('cargarDatos').style.display = 'block';
 }
