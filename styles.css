@@ -123,5 +123,5 @@ li {
 
 .premio.selected {
     background-color: #007bff; /* Resaltado en azul */
-    color: white;
+    color: rgb(12, 12, 12);
 }
