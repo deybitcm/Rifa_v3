@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Página 1: Cargar Datos -->
+    <div id="cargarDatos" class="page">
+        <h1>Cargar Datos</h1>
+        
+        <div class="file-section">
+            <label for="csvParticipantes">Importar Participantes desde CSV:</label>
+            <input type="file" id="csvParticipantes" accept=".csv">
+            <button onclick="procesarCSV('participantes')">Cargar Participantes</button>
+        </div>
+        <div class="file-section">
+            <label for="csvPremios">Importar Premios desde CSV:</label>
+            <input type="file" id="csvPremios" accept=".csv">
+            <button onclick="procesarCSV('premios')">Cargar Premios</button>
+        </div>
+        <button onclick="cargarSorteo()">Ir al Sorteo</button>
+    </div>
+
+    <div id="sorteo" class="page" style="display:none;">
+        <h1>Sorteo</h1>
+        <div class="lists-container">
+            <div class="list-section">
+                <h2>Lista de Premios</h2>
+                <ul id="listaPremios"></ul>
+            </div>
+            <div class="list-section">
+                <h2>Ganadores</h2>
+                <ul id="listaGanadores"></ul>
+            </div>
+        </div>
+        <button onclick="sortearGanador()">Sortear Ganador</button>
+    </div>
+    
+    
+
+    <!-- Página 3: Ganador -->
+    <div id="ganador" class="page" style="display:none;">
+        <h1>¡Y el ganador es!</h1>
+        <div id="contador"></div>
+        <div id="nombreGanador"></div>
+        <div id="premioGanador"></div>
+        <button onclick="volverAlSorteo()" style="display:none;" id="volverButton">Volver al Sorteo</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+</body>
+</html>
