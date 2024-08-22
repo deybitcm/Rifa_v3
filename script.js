@@ -16,8 +16,10 @@ function procesarCSV(tipo) {
     let inputFile = null;
     if (tipo === 'participantes') {
         inputFile = document.getElementById('csvParticipantes');
+        participantes = [];
     } else if (tipo === 'premios') {
         inputFile = document.getElementById('csvPremios');
+        premios = [];
     }
 
     if (inputFile.files.length === 0) {
