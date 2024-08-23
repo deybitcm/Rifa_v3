@@ -153,6 +153,15 @@ li {
     max-height: 60vh;
 }
 
+.elementoListaGanador {
+    justify-content: center;
+}
+
+.ganadoresFinalesSorteo {
+    /* Ajustar la altura según tamaño de viewport */
+    max-height: 60vh;
+}
+
 ::-webkit-scrollbar {
     width: 12px; /* Ancho del scroll */
 }

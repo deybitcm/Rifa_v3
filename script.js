@@ -284,8 +284,7 @@ function mostrarGanadores() {
     ganadores.forEach(ganador => {
         const li = document.createElement('li');
         li.textContent = `${ganador.participante} - ${ganador.premio}`;
-        li.style.alignContent = 'center';
-        li.style.textAlign = 'center';
+        li.classList.add('elementoListaGanador');
         listaGanadores.appendChild(li);
     });
 }
@@ -296,8 +295,7 @@ function mostrarGanadoresFinalSorteo() {
     ganadores.forEach(ganador => {
         const li = document.createElement('li');
         li.textContent = `${ganador.participante} - ${ganador.premio}`;
-        li.style.alignContent = 'center';
-        li.style.textAlign = 'center';
+        li.classList.add('elementoListaGanador');
         listaGanadores.appendChild(li);
     });
 }
