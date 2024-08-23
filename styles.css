@@ -118,6 +118,27 @@ li {
     padding: 10px;
 }
 
+::-webkit-scrollbar {
+    width: 12px; /* Ancho del scroll */
+}
+
+/* Estilo para la pista del scroll */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color de fondo de la pista */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Estilo para el pulgar del scroll */
+::-webkit-scrollbar-thumb {
+    background: #888; /* Color del pulgar */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Estilo para el pulgar del scroll cuando se pasa el mouse por encima */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color del pulgar al pasar el mouse */
+}
+
 .codigoGanador {
     font-size: 2.5em;
     color: #fff950;
