@@ -1,67 +1,62 @@
 let participantes = [
     {
+        id: 12345,
         nombre: 'Participante 1',
         estado: true,
     },
-    {
-        nombre: 'Participante 2',
-        estado: true,
-    },
-    {
-        nombre: 'Participante 3',
-        estado: true,
-    },
-    {
-        nombre: 'Participante 4',
-        estado: true,
-    },
-    {
-        nombre: 'Participante 5',
-        estado: true,
-    },
-    {
-        nombre: 'Participante 6',
-        estado: true,
-    },
-    {
-        nombre: 'Participante 7',
-        estado: true,
-    },
-    {
-        nombre: 'Participante 8',
-        estado: true,
-    },
-    {
-        nombre: 'Participante 9',
-        estado: true,
-    },
-    {
-        nombre: 'Participante 10',
-        estado: true,
-    },
+    
 ];
 let premios = [
     {
-        nombre: 'Premio 1',
+        nombre: 'Audífonos',
         estado: true,
     },
     {
-        nombre: 'Premio 2',
+        nombre: 'Parlante',
         estado: true,
     },
     {
-        nombre: 'Premio 3',
+        nombre: 'Kit Closet Kawaii',
         estado: true,
     },
     {
-        nombre: 'Premio 4',
+        nombre: 'Mouse',
         estado: true,
     },
     {
-        nombre: 'Premio 5',
+        nombre: 'Kit Logitech Teclado + Mouse',
+        estado: true,
+    },
+    {
+        nombre: 'Piercing',
+        estado: true,
+    },
+    {
+        nombre: 'Peluche Sanrio x Yugioh',
+        estado: true,
+    },
+    {
+        nombre: 'Cooler',
+        estado: true,
+    },
+    {
+        nombre: 'Cupón de Descuento',
+        estado: true,
+    },
+    {
+        nombre: 'Hervidor Electrico',
+        estado: true,
+    },
+    {
+        nombre: 'Tatuaje',
+        estado: true,
+    },
+    {
+        nombre: 'Kit Teros 4 en 1',
         estado: true,
     },
 ];
+
 
 function procesarCSV(tipo) {
     let inputFile = null;
@@ -88,15 +83,20 @@ function procesarCSV(tipo) {
         filas.forEach(fila => {
             const valor = fila.trim();
             if (valor) {
+                // Separar por el punto y coma
+                const [id, nombre] = valor.split(';');
+
                 if (tipo === 'participantes') {
                     const participante = {
-                        nombre: valor,
+                        id: id.trim(),
+                        nombre: nombre.trim(),
                         estado: true,
                     };
                     participantes.push(participante);
                 } else if (tipo === 'premios') {
                     const premio = {
-                        nombre: valor,
+                        id: id.trim(),
+                        nombre: nombre.trim(),
                         estado: true,
                     };
                     premios.push(premio);
@@ -114,7 +114,6 @@ function cargarSorteo() {
     if (participantes.length > 0 && premios.length > 0) {
         document.getElementById('cargarDatos').style.display = 'none';
         document.getElementById('sorteo').style.display = 'flex';
-        document.getElementById('totalParticipantes').textContent = participantes.length;
 
         actualizarListas();
     } else {
@@ -150,9 +149,10 @@ function actualizarListas() {
     });
 
     const listaParticipantes = document.getElementById('listaParticipantes');
+    listaParticipantes.innerHTML = '';
     participantes.forEach(participante => {
         const li = document.createElement('li');
-        li.textContent = participante.nombre;
+        li.textContent = participante.id;
         listaParticipantes.appendChild(li);
     });
 
@@ -177,19 +177,21 @@ function sortearGanador() {
 
         premios[selectedPremioIndex].estado = false; // Marcar el premio como no disponible
 
-        ganadores.push({ participante: ganador.nombre, premio: premio.nombre }); // Añadir el ganador a la lista de ganadores
+        ganadores.push({ id:ganador.id ,participante: ganador.nombre, premio: premio.nombre }); // Añadir el ganador a la lista de ganadores
 
         selectedPremioIndex = null;  // Reiniciar la selección de premios
-        actualizarListas();  // Actualizar las listas
+        actualizarListas();
+        participantes = participantes.filter(element => element.id !== ganador.id)  // Actualizar las listas
 
-        mostrarGanador(ganador.nombre, premio.nombre);
+        mostrarGanador(ganador.id, ganador.nombre, premio.nombre);
     } else {
         alert('Debes seleccionar un premio antes de sortear.');
     }
 }
 
 
-function mostrarGanador(ganador, premio) {
+function mostrarGanador(id, ganador, premio) {
+    document.getElementById('code').textContent = '';
     document.getElementById('sorteo').style.display = 'none';
     document.getElementById('ganador').style.display = 'block';
 
@@ -210,6 +212,11 @@ function mostrarGanador(ganador, premio) {
         if (contador === 0) {
             clearInterval(interval);
             document.getElementById('contador').style.display = 'none';
+            // Crear 1 span: uno para el texto "Ganador:" y otro para el nombre del ganador
+            const labelId = document.createElement('span');
+            labelId.textContent = id;
+            labelId.id = 'labelId';
+
             // Crear 2 span: uno para el texto "Ganador:" y otro para el nombre del ganador
             const labelGanador = document.createElement('span');
             labelGanador.textContent = 'Ganador: ';
@@ -221,6 +228,7 @@ function mostrarGanador(ganador, premio) {
             //Insertar los elementos en el div correspondiente
             document.getElementById('nombreGanador').appendChild(labelGanador);
             document.getElementById('nombreGanador').appendChild(nombreGanador);
+            document.getElementById('code').appendChild(labelId)
 
             // Crear 2 span: uno para el texto "Premio:" y otro para el nombre del premio
             const labelPremio = document.createElement('span');
@@ -235,6 +243,7 @@ function mostrarGanador(ganador, premio) {
             document.getElementById('premioGanador').appendChild(premioGanador);  
 
             document.getElementById('volverButton').style.display = 'block';
+            document.getElementById('agua').style.display = 'block';
 
             // Explosión inicial de confeti
         confetti({
@@ -275,7 +284,7 @@ function mostrarGanadores() {
     listaPremios.innerHTML = '';
     ganadores.forEach(ganador => {
         const li = document.createElement('li');
-        li.textContent = `${ganador.participante}`;
+        li.textContent = `${ganador.participante} - ${ganador.id}`;
         li.style.alignContent = 'center';
         li.style.textAlign = 'center';
         listaGanadores.appendChild(li);
@@ -312,6 +321,88 @@ function volverAlSorteo() {
     document.getElementById('ganador').style.display = 'none';
     const premiosDisponibles = premios.filter(premio => premio.estado);
     if(premiosDisponibles.length > 0){
+        document.getElementById('sorteo').style.display = 'flex';
+        actualizarListas();
+    } else {
+        document.getElementById('sorteo').style.display = 'none';
+        document.getElementById('finSorteo').style.display = 'block';
+        mostrarGanadoresFinalSorteo();
+    }
+}
+
+function alAgua() {
+    // Seleccionar un participante aleatorio con estado = true (que aún no haya ganado)
+    if (participantes.length > 0) {
+        let alAguaIndex;
+        do {
+            alAguaIndex = Math.floor(Math.random() * participantes.length);
+        } while (participantes[alAguaIndex].estado === false);
+
+        const perdedor = participantes[alAguaIndex];
+        participantes[alAguaIndex].estado = false; // Marcar al participante como eliminado
+
+        // Mostrar el resultado de "Al Agua"
+        mostrarAlAgua(perdedor.id, perdedor.nombre);
+
+        // Eliminar el participante de la lista
+        participantes = participantes.filter(element => element.id !== perdedor.id);
+
+        // Actualizar las listas
+        actualizarListas();
+    } else {
+        alert("No hay más participantes disponibles para ir al agua.");
+    }
+}
+
+function mostrarAlAgua(id, nombre) {
+    document.getElementById('codigoAlAgua').textContent = '';
+    document.getElementById('sorteo').style.display = 'none';
+    document.getElementById('alAgua').style.display = 'block';
+
+    document.getElementById('contadorAlAgua').style.display = 'block';
+    document.getElementById('nombreAlAgua').textContent = '';
+    document.getElementById('volverButtonAlAgua').style.display = 'none';
+
+    let contador = 2;
+    const contadorElemento = document.getElementById('contadorAlAgua');
+    contadorElemento.textContent = contador;
+
+    const interval = setInterval(() => {
+        contador--;
+        contadorElemento.textContent = contador;
+
+        if (contador === 0) {
+            clearInterval(interval);
+            document.getElementById('contadorAlAgua').style.display = 'none';
+
+            // Crear un span para el ID
+            const labelId = document.createElement('span');
+            labelId.textContent = id;
+            labelId.id = 'labelIdAlAgua';
+            document.getElementById('codigoAlAgua').appendChild(labelId);
+
+            // Crear dos spans para mostrar "Participante al agua:"
+            const labelAlAgua = document.createElement('span');
+            labelAlAgua.textContent = 'Participante al agua: ';
+            labelAlAgua.id = 'labelAlAgua';
+
+            const nombreParticipante = document.createElement('span');
+            nombreParticipante.textContent = nombre;
+            nombreParticipante.id = 'nombreParticipanteAlAgua';
+
+            // Insertar los elementos en el div correspondiente
+            document.getElementById('nombreAlAgua').appendChild(labelAlAgua);
+            document.getElementById('nombreAlAgua').appendChild(nombreParticipante);
+
+            document.getElementById('volverButtonAlAgua').style.display = 'block';
+        }
+    }, 1000);
+}
+
+function volverAlSorteoDesdeAlAgua() {
+    document.getElementById('alAgua').style.display = 'none';
+    const premiosDisponibles = premios.filter(premio => premio.estado);
+    if (premiosDisponibles.length > 0) {
         document.getElementById('sorteo').style.display = 'flex';
         actualizarListas();
     } else {
