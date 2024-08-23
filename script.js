@@ -3,8 +3,57 @@ let participantes = [
         id: 12345,
         nombre: 'Participante 1',
         estado: true,
+        codigo: '1234',
     },
+<<<<<<< HEAD
     
+=======
+    {
+        nombre: 'Participante 2',
+        estado: true,
+        codigo: '5678',
+    },
+    {
+        nombre: 'Participante 3',
+        estado: true,
+        codigo: '9012',
+    },
+    {
+        nombre: 'Participante 4',
+        estado: true,
+        codigo: '3456',
+    },
+    {
+        nombre: 'Participante 5',
+        estado: true,
+        codigo: '7890',
+    },
+    {
+        nombre: 'Participante 6',
+        estado: true,
+        codigo: '1145',
+    },
+    {
+        nombre: 'Participante 7',
+        estado: true,
+        codigo: '1198',
+    },
+    {
+        nombre: 'Participante 8',
+        estado: true,
+        codigo: '1157',
+    },
+    {
+        nombre: 'Participante 9',
+        estado: true,
+        codigo: '1158',
+    },
+    {
+        nombre: 'Participante 10',
+        estado: true,
+        codigo: '1159',
+    },
+>>>>>>> 19f3e22b02da67d538a5015030e89fa59c149ea1
 ];
 let premios = [
     {
@@ -81,16 +130,22 @@ function procesarCSV(tipo) {
         const filas = contenido.split('\n');
 
         filas.forEach(fila => {
-            const valor = fila.trim();
+            let valor = fila.trim();
             if (valor) {
                 // Separar por el punto y coma
                 const [id, nombre] = valor.split(';');
 
                 if (tipo === 'participantes') {
+                    valor = valor.split(';');
                     const participante = {
+<<<<<<< HEAD
                         id: id.trim(),
                         nombre: nombre.trim(),
+=======
+                        nombre: valor[1],
+>>>>>>> 19f3e22b02da67d538a5015030e89fa59c149ea1
                         estado: true,
+                        codigo: valor[0],
                     };
                     participantes.push(participante);
                 } else if (tipo === 'premios') {
@@ -165,7 +220,7 @@ function seleccionarPremio(index, li) {
 }
 
 function sortearGanador() {
-    if (selectedPremioIndex !== null) {
+    if (selectedPremioIndex !== null) {        
         //seleccionar un ganador aleatorio de participantes con estado = true
         do {
             var ganadorIndex = Math.floor(Math.random() * participantes.length);
@@ -177,13 +232,21 @@ function sortearGanador() {
 
         premios[selectedPremioIndex].estado = false; // Marcar el premio como no disponible
 
+<<<<<<< HEAD
         ganadores.push({ id:ganador.id ,participante: ganador.nombre, premio: premio.nombre }); // Añadir el ganador a la lista de ganadores
+=======
+        ganadores.push({ participante: ganador.nombre, premio: premio.nombre, codigo: ganador.codigo }); // Añadir el ganador a la lista de ganadores
+>>>>>>> 19f3e22b02da67d538a5015030e89fa59c149ea1
 
         selectedPremioIndex = null;  // Reiniciar la selección de premios
         actualizarListas();
         participantes = participantes.filter(element => element.id !== ganador.id)  // Actualizar las listas
 
+<<<<<<< HEAD
         mostrarGanador(ganador.id, ganador.nombre, premio.nombre);
+=======
+        mostrarGanador(ganador, premio);
+>>>>>>> 19f3e22b02da67d538a5015030e89fa59c149ea1
     } else {
         alert('Debes seleccionar un premio antes de sortear.');
     }
@@ -199,7 +262,7 @@ function mostrarGanador(id, ganador, premio) {
     document.getElementById('nombreGanador').textContent = '';
     document.getElementById('premioGanador').textContent = '';
     document.getElementById('volverButton').style.display = 'none';
-    
+    document.getElementById('codigoGanador').textContent = '';
 
     let contador = 2;
     const contadorElemento = document.getElementById('contador');
@@ -212,10 +275,16 @@ function mostrarGanador(id, ganador, premio) {
         if (contador === 0) {
             clearInterval(interval);
             document.getElementById('contador').style.display = 'none';
+<<<<<<< HEAD
             // Crear 1 span: uno para el texto "Ganador:" y otro para el nombre del ganador
             const labelId = document.createElement('span');
             labelId.textContent = id;
             labelId.id = 'labelId';
+=======
+
+            const codigoGandor = document.getElementById('codigoGanador');
+            codigoGandor.textContent = ganador.codigo;
+>>>>>>> 19f3e22b02da67d538a5015030e89fa59c149ea1
 
             // Crear 2 span: uno para el texto "Ganador:" y otro para el nombre del ganador
             const labelGanador = document.createElement('span');
@@ -223,7 +292,7 @@ function mostrarGanador(id, ganador, premio) {
             labelGanador.id = 'labelGanador';
 
             const nombreGanador = document.createElement('span');
-            nombreGanador.textContent = ganador;
+            nombreGanador.textContent = ganador.nombre;
             nombreGanador.id = 'nombreGanador';
             //Insertar los elementos en el div correspondiente
             document.getElementById('nombreGanador').appendChild(labelGanador);
@@ -236,7 +305,7 @@ function mostrarGanador(id, ganador, premio) {
             labelPremio.id = 'labelPremio';
 
             const premioGanador = document.createElement('span');
-            premioGanador.textContent = premio;
+            premioGanador.textContent = premio.nombre;
             premioGanador.id = 'premioGanador';
             //Insertar los elementos en el div correspondiente
             document.getElementById('premioGanador').appendChild(labelPremio);
