@@ -138,6 +138,7 @@ li {
     font-size: 1em;
     display: flex;
     justify-content: space-between;
+    cursor: default;
 }
 
 .scrollable-list {
