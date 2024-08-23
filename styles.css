@@ -90,6 +90,7 @@ button {
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 30px;
 }
 
 button:hover {
@@ -115,6 +116,13 @@ li {
     max-height: 200px; /* Ajusta la altura según sea necesario */
     overflow-y: auto;
     padding: 10px;
+}
+
+.codigoGanador {
+    font-size: 2.5em;
+    color: #fff950;
+    margin: 20px 0;
+    font-family: 'Roboto Mono', monospace;
 }
 
 #contador {

@@ -2,42 +2,52 @@ let participantes = [
     {
         nombre: 'Participante 1',
         estado: true,
+        codigo: '1234',
     },
     {
         nombre: 'Participante 2',
         estado: true,
+        codigo: '5678',
     },
     {
         nombre: 'Participante 3',
         estado: true,
+        codigo: '9012',
     },
     {
         nombre: 'Participante 4',
         estado: true,
+        codigo: '3456',
     },
     {
         nombre: 'Participante 5',
         estado: true,
+        codigo: '7890',
     },
     {
         nombre: 'Participante 6',
         estado: true,
+        codigo: '1145',
     },
     {
         nombre: 'Participante 7',
         estado: true,
+        codigo: '1198',
     },
     {
         nombre: 'Participante 8',
         estado: true,
+        codigo: '1157',
     },
     {
         nombre: 'Participante 9',
         estado: true,
+        codigo: '1158',
     },
     {
         nombre: 'Participante 10',
         estado: true,
+        codigo: '1159',
     },
 ];
 let premios = [
@@ -89,9 +99,11 @@ function procesarCSV(tipo) {
             const valor = fila.trim();
             if (valor) {
                 if (tipo === 'participantes') {
+                    const valor = valor.split(';');
                     const participante = {
-                        nombre: valor,
+                        nombre: valor[1],
                         estado: true,
+                        codigo: valor[0],
                     };
                     participantes.push(participante);
                 } else if (tipo === 'premios') {
@@ -149,6 +161,7 @@ function actualizarListas() {
     });
 
     const listaParticipantes = document.getElementById('listaParticipantes');
+    listaParticipantes.innerHTML = '';
     participantes.forEach(participante => {
         const li = document.createElement('li');
         li.textContent = participante.nombre;
@@ -164,7 +177,7 @@ function seleccionarPremio(index, li) {
 }
 
 function sortearGanador() {
-    if (selectedPremioIndex !== null) {
+    if (selectedPremioIndex !== null) {        
         //seleccionar un ganador aleatorio de participantes con estado = true
         do {
             var ganadorIndex = Math.floor(Math.random() * participantes.length);
@@ -176,12 +189,12 @@ function sortearGanador() {
 
         premios[selectedPremioIndex].estado = false; // Marcar el premio como no disponible
 
-        ganadores.push({ participante: ganador.nombre, premio: premio.nombre }); // Añadir el ganador a la lista de ganadores
+        ganadores.push({ participante: ganador.nombre, premio: premio.nombre, codigo: ganador.codigo }); // Añadir el ganador a la lista de ganadores
 
         selectedPremioIndex = null;  // Reiniciar la selección de premios
         actualizarListas();  // Actualizar las listas
 
-        mostrarGanador(ganador.nombre, premio.nombre);
+        mostrarGanador(ganador, premio);
     } else {
         alert('Debes seleccionar un premio antes de sortear.');
     }
@@ -196,7 +209,7 @@ function mostrarGanador(ganador, premio) {
     document.getElementById('nombreGanador').textContent = '';
     document.getElementById('premioGanador').textContent = '';
     document.getElementById('volverButton').style.display = 'none';
-    
+    document.getElementById('codigoGanador').textContent = '';
 
     let contador = 2;
     const contadorElemento = document.getElementById('contador');
@@ -209,13 +222,17 @@ function mostrarGanador(ganador, premio) {
         if (contador === 0) {
             clearInterval(interval);
             document.getElementById('contador').style.display = 'none';
+
+            const codigoGandor = document.getElementById('codigoGanador');
+            codigoGandor.textContent = ganador.codigo;
+
             // Crear 2 span: uno para el texto "Ganador:" y otro para el nombre del ganador
             const labelGanador = document.createElement('span');
             labelGanador.textContent = 'Ganador: ';
             labelGanador.id = 'labelGanador';
 
             const nombreGanador = document.createElement('span');
-            nombreGanador.textContent = ganador;
+            nombreGanador.textContent = ganador.nombre;
             nombreGanador.id = 'nombreGanador';
             //Insertar los elementos en el div correspondiente
             document.getElementById('nombreGanador').appendChild(labelGanador);
@@ -227,7 +244,7 @@ function mostrarGanador(ganador, premio) {
             labelPremio.id = 'labelPremio';
 
             const premioGanador = document.createElement('span');
-            premioGanador.textContent = premio;
+            premioGanador.textContent = premio.nombre;
             premioGanador.id = 'premioGanador';
             //Insertar los elementos en el div correspondiente
             document.getElementById('premioGanador').appendChild(labelPremio);
