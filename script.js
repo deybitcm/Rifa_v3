@@ -162,7 +162,12 @@ function actualizarListas() {
     listaParticipantes.innerHTML = '';
     participantes.forEach(participante => {
         const li = document.createElement('li');
-        li.textContent = participante.nombre;
+        const spanNombre = document.createElement('span');
+        const spanCodigo = document.createElement('span');
+        spanNombre.textContent = participante.nombre;
+        spanCodigo.textContent = participante.codigo;
+        li.appendChild(spanNombre);
+        li.appendChild(spanCodigo);
         listaParticipantes.appendChild(li);
     });
 
@@ -284,41 +289,25 @@ function mostrarGanador(ganador, premio) {
 
 function mostrarGanadores() {
     const listaGanadores = document.getElementById('listaGanadoresFinal');
-    const listaPremios = document.getElementById('listaPremiosFinal');
     listaGanadores.innerHTML = '';
-    listaPremios.innerHTML = '';
     ganadores.forEach(ganador => {
         const li = document.createElement('li');
-        li.textContent = `${ganador.participante}`;
+        li.textContent = `${ganador.participante} - ${ganador.premio}`;
         li.style.alignContent = 'center';
         li.style.textAlign = 'center';
         listaGanadores.appendChild(li);
-
-        const liPremio = document.createElement('li');
-        liPremio.textContent = `${ganador.premio}`;
-        liPremio.style.alignContent = 'center';
-        liPremio.style.textAlign = 'center';
-        listaPremios.appendChild(liPremio);
     });
 }
 
 function mostrarGanadoresFinalSorteo() {
     const listaGanadores = document.getElementById('listaGanadoresFinalSorteo');
-    const listaPremios = document.getElementById('listaPremiosFinalSorteo');
     listaGanadores.innerHTML = '';
-    listaPremios.innerHTML = '';
     ganadores.forEach(ganador => {
         const li = document.createElement('li');
-        li.textContent = `${ganador.participante}`;
+        li.textContent = `${ganador.participante} - ${ganador.premio}`;
         li.style.alignContent = 'center';
         li.style.textAlign = 'center';
         listaGanadores.appendChild(li);
-
-        const liPremio = document.createElement('li');
-        liPremio.textContent = `${ganador.premio}`;
-        liPremio.style.alignContent = 'center';
-        liPremio.style.textAlign = 'center';
-        listaPremios.appendChild(liPremio);
     });
 }
 

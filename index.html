@@ -38,20 +38,22 @@
                 </div>
                 <div class="list-section">
                     <h2>Lista de Premios</h2>
-                    <ul id="listaPremiosInicial"></ul>
+                    <div class="scrollable-list">
+                        <ul id="listaPremiosInicial">
+                            <!-- Lista de premios -->
+                        </ul>
+                    </div>
                 </div>
             </div>
             <button onclick="sortearGanador()">Sortear Ganador</button>
         </div>
         <div class="column right-panel">
             <h1>Ganadores</h1>
-            <div class="lists-container">
-                <div class="list-section">
-                    <ul id="listaGanadoresFinal"></ul>
-                </div>
-                <div class="list-section">
-                    <ul id="listaPremiosFinal"></ul>
-                </div>
+            <!-- Lista de ganadores -->
+            <div class="scrollable-list listaGanadores">
+                <ul id="listaGanadoresFinal">
+                    <!-- Lista de ganadores -->
+                </ul>
             </div>
         </div>
     </div>
@@ -70,13 +72,10 @@
     <div id="finSorteo" class="page" style="display:none;">
         <h1>¡Felicidades a los Ganadores!</h1>
         <h2>Estos son los ganadores y sus premios:</h2>
-        <div class="lists-container">
-            <div class="list-section">                
-                <ul id="listaGanadoresFinalSorteo"></ul>
-            </div>
-            <div class="list-section">
-                <ul id="listaPremiosFinalSorteo"></ul>
-            </div>
+        <div class="scrollable-list">
+            <ul id="listaGanadoresFinalSorteo">
+                <!-- Lista de ganadores -->
+            </ul>
         </div>
         <button onclick="reiniciarSorteo()">Reiniciar Sorteo</button>
     </div>
