@@ -303,7 +303,7 @@ function mostrarGanadoresFinalSorteo() {
 function volverAlSorteo() {
     document.getElementById('ganador').style.display = 'none';
     const premiosDisponibles = premios.filter(premio => premio.estado);
-    if(premiosDisponibles.length > 0){
+    if(premiosDisponibles.length > 0 && participantes.length > 0){
         document.getElementById('sorteo').style.display = 'flex';
         actualizarListas();
     } else {
