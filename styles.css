@@ -111,6 +111,12 @@ li {
     font-size: 1em;
 }
 
+.scrollable-list {
+    max-height: 200px; /* Ajusta la altura según sea necesario */
+    overflow-y: auto;
+    padding: 10px;
+}
+
 #contador {
     font-size: 2.5em;
     margin: 20px 0;

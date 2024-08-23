@@ -149,6 +149,13 @@ function actualizarListas() {
         listaPremios.appendChild(li);
     });
 
+    const listaParticipantes = document.getElementById('listaParticipantes');
+    participantes.forEach(participante => {
+        const li = document.createElement('li');
+        li.textContent = participante.nombre;
+        listaParticipantes.appendChild(li);
+    });
+
     mostrarGanadores();
 }
 
