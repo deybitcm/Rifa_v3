@@ -245,6 +245,7 @@ li {
     background-color: #007bff; /* Resaltado en azul */
     color: rgb(12, 12, 12);
 }
+
 .code-number {
     font-size: 3rem;
 }
@@ -253,4 +254,8 @@ li {
     background-color: #7f8c8d;
     color: #bdc3c7;
     cursor: not-allowed;
+}
+
+.clickable:hover {
+    background-color: #4d7abf;
 }

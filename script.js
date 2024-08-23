@@ -136,6 +136,7 @@ function actualizarListas() {
             li.onclick = function () {
                 seleccionarPremio(index, li);
             };
+            li.classList.add('clickable');
         }
         li.textContent = premio.nombre;
         if (index === selectedPremioIndex) {
