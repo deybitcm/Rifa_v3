@@ -96,10 +96,10 @@ function procesarCSV(tipo) {
         const filas = contenido.split('\n');
 
         filas.forEach(fila => {
-            const valor = fila.trim();
+            let valor = fila.trim();
             if (valor) {
                 if (tipo === 'participantes') {
-                    const valor = valor.split(';');
+                    valor = valor.split(';');
                     const participante = {
                         nombre: valor[1],
                         estado: true,
