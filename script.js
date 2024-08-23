@@ -114,7 +114,6 @@ function cargarSorteo() {
     if (participantes.length > 0 && premios.length > 0) {
         document.getElementById('cargarDatos').style.display = 'none';
         document.getElementById('sorteo').style.display = 'flex';
-        document.getElementById('totalParticipantes').textContent = participantes.length;
 
         actualizarListas();
     } else {
@@ -150,6 +149,7 @@ function actualizarListas() {
     });
 
     const listaParticipantes = document.getElementById('listaParticipantes');
+    listaParticipantes.innerHTML = '';
     participantes.forEach(participante => {
         const li = document.createElement('li');
         li.textContent = participante.nombre;
