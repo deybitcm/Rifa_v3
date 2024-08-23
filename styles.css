@@ -155,6 +155,8 @@ li {
 
 .elementoListaGanador {
     justify-content: center;
+    align-items: center;
+    flex-flow: column;
 }
 
 .ganadoresFinalesSorteo {

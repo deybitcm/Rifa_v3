@@ -152,8 +152,8 @@ function actualizarListas() {
         const li = document.createElement('li');
         const spanNombre = document.createElement('span');
         const spanCodigo = document.createElement('span');
-        spanNombre.textContent = participante.nombre;
-        spanCodigo.textContent = participante.codigo;
+        spanNombre.textContent = participante.id;
+        // spanCodigo.textContent = participante.codigo;
         li.appendChild(spanNombre);
         li.appendChild(spanCodigo);
         listaParticipantes.appendChild(li);
@@ -280,9 +280,24 @@ function mostrarGanador(id, ganador, premio) {
 function mostrarGanadores() {
     const listaGanadores = document.getElementById('listaGanadoresFinal');
     listaGanadores.innerHTML = 'No hay ganadores aún.';
+    if(ganadores.length > 0){
+        listaGanadores.innerHTML = '';
+    }
     ganadores.forEach(ganador => {
         const li = document.createElement('li');
-        li.textContent = `${ganador.participante} - ${ganador.premio}`;
+        // Crear 2 divs, uno para el nombre del ganador y otro para el premio
+        const divGanador = document.createElement('div');
+        divGanador.textContent = `${ganador.participante} - ${ganador.premio}`; // Cambiar por el nombre del ganador
+        divGanador.classList.add('elementoListaGanador');
+
+        const divPremio = document.createElement('div');
+        divPremio.textContent = ganador.id;
+        divPremio.classList.add('elementoListaGanador');
+
+        // Insertar los divs en el li
+        li.appendChild(divGanador);
+        li.appendChild(divPremio);
+
         li.classList.add('elementoListaGanador');
         listaGanadores.appendChild(li);
     });
@@ -291,9 +306,24 @@ function mostrarGanadores() {
 function mostrarGanadoresFinalSorteo() {
     const listaGanadores = document.getElementById('listaGanadoresFinalSorteo');
     listaGanadores.innerHTML = 'No hubo ganadores en este sorteo.';
+    if(ganadores.length > 0){
+        listaGanadores.innerHTML = '';
+    }
     ganadores.forEach(ganador => {
         const li = document.createElement('li');
-        li.textContent = `${ganador.participante} - ${ganador.premio}`;
+        // Crear 2 divs, uno para el nombre del ganador y otro para el premio
+        const divGanador = document.createElement('div');
+        divGanador.textContent = `${ganador.participante} - ${ganador.premio}`; // Cambiar por el nombre del ganador
+        divGanador.classList.add('elementoListaGanador');
+
+        const divPremio = document.createElement('div');
+        divPremio.textContent = ganador.id;
+        divPremio.classList.add('elementoListaGanador');
+
+        // Insertar los divs en el li
+        li.appendChild(divGanador);
+        li.appendChild(divPremio);
+
         li.classList.add('elementoListaGanador');
         listaGanadores.appendChild(li);
     });
