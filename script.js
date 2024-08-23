@@ -1,23 +1,67 @@
 let participantes = [
-    'Participante 1',
-    'Participante 2',
-    'Participante 3',
-    'Participante 4',
-    'Participante 5',
-    'Participante 6',
-    'Participante 7',
-    'Participante 8',
-    'Participante 9',
-    'Participante 10',
+    {
+        nombre: 'Participante 1',
+        estado: true,
+    },
+    {
+        nombre: 'Participante 2',
+        estado: true,
+    },
+    {
+        nombre: 'Participante 3',
+        estado: true,
+    },
+    {
+        nombre: 'Participante 4',
+        estado: true,
+    },
+    {
+        nombre: 'Participante 5',
+        estado: true,
+    },
+    {
+        nombre: 'Participante 6',
+        estado: true,
+    },
+    {
+        nombre: 'Participante 7',
+        estado: true,
+    },
+    {
+        nombre: 'Participante 8',
+        estado: true,
+    },
+    {
+        nombre: 'Participante 9',
+        estado: true,
+    },
+    {
+        nombre: 'Participante 10',
+        estado: true,
+    },
 ];
 let premios = [
-    'Premio 1',
-    'Premio 2',
-    'Premio 3',
-    'Premio 4',
-    'Premio 5',
+    {
+        nombre: 'Premio 1',
+        estado: true,
+    },
+    {
+        nombre: 'Premio 2',
+        estado: true,
+    },
+    {
+        nombre: 'Premio 3',
+        estado: true,
+    },
+    {
+        nombre: 'Premio 4',
+        estado: true,
+    },
+    {
+        nombre: 'Premio 5',
+        estado: true,
+    },
 ];
-
 
 function procesarCSV(tipo) {
     let inputFile = null;
@@ -45,9 +89,17 @@ function procesarCSV(tipo) {
             const valor = fila.trim();
             if (valor) {
                 if (tipo === 'participantes') {
-                    participantes.push(valor);
+                    const participante = {
+                        nombre: valor,
+                        estado: true,
+                    };
+                    participantes.push(participante);
                 } else if (tipo === 'premios') {
-                    premios.push(valor);
+                    const premio = {
+                        nombre: valor,
+                        estado: true,
+                    };
+                    premios.push(premio);
                 }
             }
         });
@@ -58,11 +110,11 @@ function procesarCSV(tipo) {
     reader.readAsText(file);
 }
 
-
 function cargarSorteo() {
     if (participantes.length > 0 && premios.length > 0) {
         document.getElementById('cargarDatos').style.display = 'none';
-        document.getElementById('sorteo').style.display = 'block';
+        document.getElementById('sorteo').style.display = 'flex';
+        document.getElementById('totalParticipantes').textContent = participantes.length;
 
         actualizarListas();
     } else {
@@ -70,19 +122,25 @@ function cargarSorteo() {
     }
 }
 
-
 let selectedPremioIndex = null;
 let ganadores = []; // Definimos la lista de ganadores
 
 function actualizarListas() {
-    const listaPremios = document.getElementById('listaPremios');
+    const listaPremios = document.getElementById('listaPremiosInicial');
     listaPremios.innerHTML = '';
     premios.forEach((premio, index) => {
         const li = document.createElement('li');
-        li.textContent = premio;
-        li.onclick = function () {
-            seleccionarPremio(index, li);
-        };
+        if(premio.estado === false){
+            li.style.backgroundColor = 'red'; // Resalta el premio seleccionado
+            //cambiar color de texto
+            li.style.color = 'white';
+        }
+        else {
+            li.onclick = function () {
+                seleccionarPremio(index, li);
+            };
+        }
+        li.textContent = premio.nombre;
         if (index === selectedPremioIndex) {
             li.style.backgroundColor = 'lightblue'; // Resalta el premio seleccionado
             //cambiar color de texto
@@ -91,13 +149,7 @@ function actualizarListas() {
         listaPremios.appendChild(li);
     });
 
-    const listaGanadores = document.getElementById('listaGanadores');
-    listaGanadores.innerHTML = '';
-    ganadores.forEach(ganador => {
-        const li = document.createElement('li');
-        li.textContent = `${ganador.participante} - ${ganador.premio}`;
-        listaGanadores.appendChild(li);
-    });
+    mostrarGanadores();
 }
 
 function seleccionarPremio(index, li) {
@@ -107,19 +159,23 @@ function seleccionarPremio(index, li) {
 
 function sortearGanador() {
     if (selectedPremioIndex !== null) {
-        const ganadorIndex = Math.floor(Math.random() * participantes.length);
+        //seleccionar un ganador aleatorio de participantes con estado = true
+        do {
+            var ganadorIndex = Math.floor(Math.random() * participantes.length);
+        } while (participantes[ganadorIndex].estado === false);
         const ganador = participantes[ganadorIndex];
         const premio = premios[selectedPremioIndex];
 
-        participantes.splice(ganadorIndex, 1);  // Eliminar ganador de la lista de participantes
-        premios.splice(selectedPremioIndex, 1);  // Eliminar premio de la lista de premios
+        participantes[ganadorIndex].estado = false; // Marcar al ganador como no disponible
 
-        ganadores.push({ participante: ganador, premio: premio }); // Añadir el ganador a la lista de ganadores
+        premios[selectedPremioIndex].estado = false; // Marcar el premio como no disponible
+
+        ganadores.push({ participante: ganador.nombre, premio: premio.nombre }); // Añadir el ganador a la lista de ganadores
 
         selectedPremioIndex = null;  // Reiniciar la selección de premios
         actualizarListas();  // Actualizar las listas
 
-        mostrarGanador(ganador, premio);
+        mostrarGanador(ganador.nombre, premio.nombre);
     } else {
         alert('Debes seleccionar un premio antes de sortear.');
     }
@@ -225,37 +281,103 @@ function mostrarGanadores() {
     });
 }
 
+function mostrarGanadoresFinalSorteo() {
+    const listaGanadores = document.getElementById('listaGanadoresFinalSorteo');
+    const listaPremios = document.getElementById('listaPremiosFinalSorteo');
+    listaGanadores.innerHTML = '';
+    listaPremios.innerHTML = '';
+    ganadores.forEach(ganador => {
+        const li = document.createElement('li');
+        li.textContent = `${ganador.participante}`;
+        li.style.alignContent = 'center';
+        li.style.textAlign = 'center';
+        listaGanadores.appendChild(li);
+
+        const liPremio = document.createElement('li');
+        liPremio.textContent = `${ganador.premio}`;
+        liPremio.style.alignContent = 'center';
+        liPremio.style.textAlign = 'center';
+        listaPremios.appendChild(liPremio);
+    });
+}
+
 function volverAlSorteo() {
     document.getElementById('ganador').style.display = 'none';
-    if(premios.length > 0){
-        document.getElementById('sorteo').style.display = 'block';
+    const premiosDisponibles = premios.filter(premio => premio.estado);
+    if(premiosDisponibles.length > 0){
+        document.getElementById('sorteo').style.display = 'flex';
         actualizarListas();
     } else {
         document.getElementById('sorteo').style.display = 'none';
         document.getElementById('finSorteo').style.display = 'block';
-        mostrarGanadores();
+        mostrarGanadoresFinalSorteo();
     }
 }
 
 function reiniciarSorteo() {
     participantes = [
-        'Participante 1',
-        'Participante 2',
-        'Participante 3',
-        'Participante 4',
-        'Participante 5',
-        'Participante 6',
-        'Participante 7',
-        'Participante 8',
-        'Participante 9',
-        'Participante 10',
+        {
+            nombre: 'Participante 1',
+            estado: true,
+        },
+        {
+            nombre: 'Participante 2',
+            estado: true,
+        },
+        {
+            nombre: 'Participante 3',
+            estado: true,
+        },
+        {
+            nombre: 'Participante 4',
+            estado: true,
+        },
+        {
+            nombre: 'Participante 5',
+            estado: true,
+        },
+        {
+            nombre: 'Participante 6',
+            estado: true,
+        },
+        {
+            nombre: 'Participante 7',
+            estado: true,
+        },
+        {
+            nombre: 'Participante 8',
+            estado: true,
+        },
+        {
+            nombre: 'Participante 9',
+            estado: true,
+        },
+        {
+            nombre: 'Participante 10',
+            estado: true,
+        },
     ];
     premios = [
-        'Premio 1',
-        'Premio 2',
-        'Premio 3',
-        'Premio 4',
-        'Premio 5',
+        {
+            nombre: 'Premio 1',
+            estado: true,
+        },
+        {
+            nombre: 'Premio 2',
+            estado: true,
+        },
+        {
+            nombre: 'Premio 3',
+            estado: true,
+        },
+        {
+            nombre: 'Premio 4',
+            estado: true,
+        },
+        {
+            nombre: 'Premio 5',
+            estado: true,
+        },
     ];
     ganadores = [];
     selectedPremioIndex = null;
