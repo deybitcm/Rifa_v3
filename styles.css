@@ -196,6 +196,12 @@ li {
     color: #ecf0f1;
 }
 
+#contadorAlAgua {
+    font-size: 2.5em;
+    margin: 20px 0;
+    color: #ecf0f1;
+}
+
 #nombreGanador, #premioGanador {
     font-size: 1.2em;
     color: #ffffff;

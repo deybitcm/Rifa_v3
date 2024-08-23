@@ -57,7 +57,6 @@ let premios = [
     },
 ];
 
-
 function procesarCSV(tipo) {
     let inputFile = null;
     if (tipo === 'participantes') {
@@ -280,7 +279,7 @@ function mostrarGanador(id, ganador, premio) {
 
 function mostrarGanadores() {
     const listaGanadores = document.getElementById('listaGanadoresFinal');
-    listaGanadores.innerHTML = '';
+    listaGanadores.innerHTML = 'No hay ganadores aún.';
     ganadores.forEach(ganador => {
         const li = document.createElement('li');
         li.textContent = `${ganador.participante} - ${ganador.premio}`;
@@ -291,7 +290,7 @@ function mostrarGanadores() {
 
 function mostrarGanadoresFinalSorteo() {
     const listaGanadores = document.getElementById('listaGanadoresFinalSorteo');
-    listaGanadores.innerHTML = '';
+    listaGanadores.innerHTML = 'No hubo ganadores en este sorteo.';
     ganadores.forEach(ganador => {
         const li = document.createElement('li');
         li.textContent = `${ganador.participante} - ${ganador.premio}`;
@@ -385,7 +384,7 @@ function mostrarAlAgua(id, nombre) {
 function volverAlSorteoDesdeAlAgua() {
     document.getElementById('alAgua').style.display = 'none';
     const premiosDisponibles = premios.filter(premio => premio.estado);
-    if (premiosDisponibles.length > 0) {
+    if (premiosDisponibles.length > 0 && participantes.length > 0) {
         document.getElementById('sorteo').style.display = 'flex';
         actualizarListas();
     } else {
@@ -398,68 +397,63 @@ function volverAlSorteoDesdeAlAgua() {
 function reiniciarSorteo() {
     participantes = [
         {
+            id: 12345,
             nombre: 'Participante 1',
             estado: true,
         },
-        {
-            nombre: 'Participante 2',
-            estado: true,
-        },
-        {
-            nombre: 'Participante 3',
-            estado: true,
-        },
-        {
-            nombre: 'Participante 4',
-            estado: true,
-        },
-        {
-            nombre: 'Participante 5',
-            estado: true,
-        },
-        {
-            nombre: 'Participante 6',
-            estado: true,
-        },
-        {
-            nombre: 'Participante 7',
-            estado: true,
-        },
-        {
-            nombre: 'Participante 8',
-            estado: true,
-        },
-        {
-            nombre: 'Participante 9',
-            estado: true,
-        },
-        {
-            nombre: 'Participante 10',
-            estado: true,
-        },
+        
     ];
     premios = [
         {
-            nombre: 'Premio 1',
+            nombre: 'Audífonos',
             estado: true,
         },
         {
-            nombre: 'Premio 2',
+            nombre: 'Parlante',
             estado: true,
         },
         {
-            nombre: 'Premio 3',
+            nombre: 'Kit Closet Kawaii',
             estado: true,
         },
         {
-            nombre: 'Premio 4',
+            nombre: 'Mouse',
             estado: true,
         },
         {
-            nombre: 'Premio 5',
+            nombre: 'Kit Logitech Teclado + Mouse',
+            estado: true,
+        },
+        {
+            nombre: 'Piercing',
+            estado: true,
+        },
+        {
+            nombre: 'Peluche Sanrio x Yugioh',
+            estado: true,
+        },
+        {
+            nombre: 'Cooler',
+            estado: true,
+        },
+        {
+            nombre: 'Cupón de Descuento',
+            estado: true,
+        },
+        {
+            nombre: 'Hervidor Electrico',
+            estado: true,
+        },
+        {
+            nombre: 'Tatuaje',
+            estado: true,
+        },
+        {
+            nombre: 'Kit Teros 4 en 1',
             estado: true,
         },
     ];
+    
     ganadores = [];
     selectedPremioIndex = null;
 
