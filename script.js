@@ -132,9 +132,7 @@ function actualizarListas() {
     premios.forEach((premio, index) => {
         const li = document.createElement('li');
         if(premio.estado === false){
-            li.style.backgroundColor = 'red'; // Resalta el premio seleccionado
-            //cambiar color de texto
-            li.style.color = 'white';
+            li.classList.add('desactivado');
         }
         else {
             li.onclick = function () {
