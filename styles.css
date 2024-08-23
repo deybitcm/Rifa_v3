@@ -12,7 +12,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 0 100px;
+    /* padding: 0 100px; */
 }
 
 /* Estilos para el video de fondo */
@@ -56,7 +56,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     text-align: center;
-    margin: 40px;
+    margin-inline: 40px;
 }
 
 .left-panel {
@@ -90,7 +90,7 @@ h2 {
 }
 
 .input-section, .file-section, .list-section, .select-section {
-    margin: 20px 0;
+    margin-inline: 10px;
 }
 
 input[type="text"], input[type="file"], select {
@@ -144,7 +144,7 @@ li {
     /* Ajustar la altura según tamaño de viewport */
     overflow-y: auto;
     padding-inline: 10px;
-    max-height: 35vh;
+    max-height: 30vh;
 }
 
 .listaGanadores {
@@ -229,4 +229,10 @@ li {
 }
 .code-number {
     font-size: 3rem;
+}
+
+.desactivado {
+    background-color: #7f8c8d;
+    color: #bdc3c7;
+    cursor: not-allowed;
 }
