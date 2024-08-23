@@ -10,7 +10,6 @@
     <!-- Página 1: Cargar Datos -->
     <div id="cargarDatos" class="page">
         <h1>Cargar Datos</h1>
-        
         <div class="file-section">
             <label for="csvParticipantes">Importar Participantes desde CSV:</label>
             <input type="file" id="csvParticipantes" accept=".csv">
@@ -25,19 +24,38 @@
     </div>
 
     <!-- Página 2: Sorteo -->
-    <div id="sorteo" class="page" style="display:none;">
-        <h1>Sorteo</h1>
-        <div class="lists-container">
-            <div class="list-section">
-                <h2>Lista de Premios</h2>
-                <ul id="listaPremios"></ul>
+    <div id="sorteo" class="row" style="display:none;">
+        <div class="column left-panel">
+            <h1>Sorteo</h1>
+            <div class="lists-container">
+                <div class="list-section">
+                    <h2>Participantes</h2>
+                    <span>Total participantes: </span>
+                    <span id="totalParticipantes"></span>
+                    <div class="scrollable-list">
+                        <ul id="listaParticipantes">
+                            <!-- Lista de participantes -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="list-section">
+                    <h2>Lista de Premios</h2>
+                    <ul id="listaPremiosInicial"></ul>
+                </div>
             </div>
-            <div class="list-section">
-                <h2>Ganadores</h2>
-                <ul id="listaGanadores"></ul>
+            <button onclick="sortearGanador()">Sortear Ganador</button>
+        </div>
+        <div class="column right-panel">
+            <h1>Ganadores</h1>
+            <div class="lists-container">
+                <div class="list-section">
+                    <ul id="listaGanadoresFinal"></ul>
+                </div>
+                <div class="list-section">
+                    <ul id="listaPremiosFinal"></ul>
+                </div>
             </div>
         </div>
-        <button onclick="sortearGanador()">Sortear Ganador</button>
     </div>
 
     <!-- Página 3: Ganador -->
@@ -55,13 +73,14 @@
         <h2>Estos son los ganadores y sus premios:</h2>
         <div class="lists-container">
             <div class="list-section">                
-                <ul id="listaGanadoresFinal"></ul>
+                <ul id="listaGanadoresFinalSorteo"></ul>
             </div>
             <div class="list-section">
-                <ul id="listaPremiosFinal"></ul>
+                <ul id="listaPremiosFinalSorteo"></ul>
             </div>
         </div>
         <button onclick="reiniciarSorteo()">Reiniciar Sorteo</button>
+    </div>
 
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
