@@ -3,7 +3,6 @@ let participantes = [
         id: 12345,
         nombre: 'Participante 1',
         estado: true,
-        codigo: '1234',
     },
     
 ];
@@ -199,9 +198,8 @@ function mostrarGanador(id, ganador, premio) {
     document.getElementById('nombreGanador').textContent = '';
     document.getElementById('premioGanador').textContent = '';
     document.getElementById('volverButton').style.display = 'none';
-    document.getElementById('codigoGanador').textContent = '';
 
-    let contador = 2;
+    let contador = 3;
     const contadorElemento = document.getElementById('contador');
     contadorElemento.textContent = contador;
 
@@ -223,7 +221,7 @@ function mostrarGanador(id, ganador, premio) {
             labelGanador.id = 'labelGanador';
 
             const nombreGanador = document.createElement('span');
-            nombreGanador.textContent = ganador.nombre;
+            nombreGanador.textContent = ganador;
             nombreGanador.id = 'nombreGanador';
             //Insertar los elementos en el div correspondiente
             document.getElementById('nombreGanador').appendChild(labelGanador);
@@ -236,14 +234,13 @@ function mostrarGanador(id, ganador, premio) {
             labelPremio.id = 'labelPremio';
 
             const premioGanador = document.createElement('span');
-            premioGanador.textContent = premio.nombre;
+            premioGanador.textContent = premio;
             premioGanador.id = 'premioGanador';
             //Insertar los elementos en el div correspondiente
             document.getElementById('premioGanador').appendChild(labelPremio);
             document.getElementById('premioGanador').appendChild(premioGanador);  
 
             document.getElementById('volverButton').style.display = 'block';
-            document.getElementById('agua').style.display = 'block';
 
             // Explosión inicial de confeti
         confetti({
@@ -272,7 +269,6 @@ function mostrarGanador(id, ganador, premio) {
             volverAlSorteo();
         };
         }
-
         
     }, 1000);
 }
@@ -363,7 +359,7 @@ function mostrarAlAgua(id, nombre) {
     document.getElementById('nombreAlAgua').textContent = '';
     document.getElementById('volverButtonAlAgua').style.display = 'none';
 
-    let contador = 2;
+    let contador = 3;
     const contadorElemento = document.getElementById('contadorAlAgua');
     contadorElemento.textContent = contador;
 
