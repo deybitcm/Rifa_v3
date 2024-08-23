@@ -12,6 +12,30 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    padding: 0 100px;
+}
+
+/* Estilos para el video de fondo */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    object-fit: cover;
+    filter: blur(10px);
+}
+
+/* Capa oscura sobre el video */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Oscurecimiento */
+    z-index: -1;
 }
 
 .row {
@@ -46,7 +70,7 @@ body {
 .page {
     width: 100%;
     max-width: 600px;
-    background-color: rgba(28, 31, 36, 0.9);
+    background-color: rgba(28, 31, 36, 0.98);
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
@@ -203,8 +227,6 @@ li {
     background-color: #007bff; /* Resaltado en azul */
     color: rgb(12, 12, 12);
 }
-
-li.desactivado {
-    background-color: #7f8c8d;
-    color: #bdc3c7;
+.code-number {
+    font-size: 3rem;
 }

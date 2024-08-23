@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Video de fondo -->
+    <video class="video-background" autoplay loop muted>
+        <source src="./bg-de-mrd.mp4" type="video/mp4">
+    </video>
+
+    <!-- Capa oscura sobre el video -->
+    <div class="overlay"></div>
+
     <!-- Página 1: Cargar Datos -->
     <div id="cargarDatos" class="page">
         <h1>Cargar Datos</h1>
@@ -15,11 +23,7 @@
             <input type="file" id="csvParticipantes" accept=".csv">
             <button onclick="procesarCSV('participantes')">Cargar Participantes</button>
         </div>
-        <div class="file-section">
-            <label for="csvPremios">Importar Premios desde CSV:</label>
-            <input type="file" id="csvPremios" accept=".csv">
-            <button onclick="procesarCSV('premios')">Cargar Premios</button>
-        </div>
+        
         <button onclick="cargarSorteo()">Ir al Sorteo</button>
     </div>
 
@@ -46,6 +50,8 @@
                 </div>
             </div>
             <button onclick="sortearGanador()">Sortear Ganador</button>
+            <button onclick="alAgua()">Al agua</button>
+
         </div>
         <div class="column right-panel">
             <h1>Ganadores</h1>
@@ -60,12 +66,21 @@
 
     <!-- Página 3: Ganador -->
     <div id="ganador" class="page" style="display:none;">
-        <span id="codigoGanador" class="codigoGanador"></span>
+        <h2 class="code-number" id="code"></h2>
         <h1>¡Y el ganador es!</h1>
         <div id="contador"></div>
         <div id="nombreGanador"></div>
         <div id="premioGanador"></div>
-        <button onclick="volverAlSorteo()" style="display:none;" id="volverButton">Volver al Sorteo</button>
+        <button onclick="volverAlSorteo()" style="display:none;" id="volverButton">Volver</button>
+    </div>
+
+    <!-- Página 4: Al Agua -->
+    <div id="alAgua" class="page" style="display:none;">
+        <h2 class="code-number" id="codigoAlAgua"></h2>
+        <h1>¡Al Agua!</h1>
+        <div id="contadorAlAgua"></div>
+        <div id="nombreAlAgua"></div>
+        <button onclick="volverAlSorteoDesdeAlAgua()" style="display:none;" id="volverButtonAlAgua">Volver</button>
     </div>
 
     <!-- Pagina 4: Fin del Sorteo -->
